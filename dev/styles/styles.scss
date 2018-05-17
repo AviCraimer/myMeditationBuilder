@@ -1,12 +1,11 @@
-@import "setup";
-@import "variables";
-@import "mixins";
-@import "global";
+@import "_mixins.scss";
+@import "_setup.scss";
+@import "_variables.scss";
+@import "_global.scss";
 
 
 // Components
 
-@import "./components/page-landing";
-
+@import "./components/page-landing.scss";
 
 

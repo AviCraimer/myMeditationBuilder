@@ -13,7 +13,6 @@ body {
 
 h1, h2, h3, h4, h5, h6, button   {
   font-family: $headerFont;
-
 }
 
 a {
@@ -26,6 +25,34 @@ img {
   width: 100%;
 }
 
+button {
+  border: 1px solid black;
+  background: none;
+  padding: 10px;
+  margin: 5px;
+}
+
+.active-button {
+  background: $bgColor1;
+}
+
+body {
+  background: $bgColor1;
+
+
+}
+
+.app {
+  background: $bgColor2;
+
+}
+
+.login-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+
+}
 
 
 

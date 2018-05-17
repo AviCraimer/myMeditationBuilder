@@ -4,7 +4,11 @@ import firebase from 'firebase';
 
 const PageMyMeditations = ({fn}) => {
   fn.test();
-  return <p>My Meditations Page</p>;
+  return (
+    <h1>My Meditations</h1>
+
+
+  );
 }
 
 
