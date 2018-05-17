@@ -1,0 +1,32 @@
+//Vincent Chevalier shared this mixin with me at the Fishbowl Session on responsive design. It allows me to fine tune my breakpoints without having to change all my media queries.
+@mixin mediaQ($point) {
+	@if $point == $mobile {
+		@media ($mobile) { @content; }
+	}
+
+	@else if $point == $tablet {
+		@media ($tablet) { @content; }
+	}
+
+  @else if $point == $laptop {
+		@media ($laptop) { @content; }
+	}
+ }
+
+//Modifeid from this article: https://engageinteractive.co.uk/blog/top-10-scss-mixins
+ @mixin type(
+    $size: false,
+    $colour: false,
+    $weight: false,
+    $lh: false,
+    $align:false,
+    $upper:false) {
+  @if $size { font-size: $size*1rem ; }
+  @if $colour { color: $colour; }
+  @if $weight { font-weight: $weight; }
+  @if $lh { line-height: $lh; }
+  @if $align { text-align: $align}
+  @if $upper { text-transform: uppercase; }
+}
+
+

@@ -1,0 +1,31 @@
+// GLOBAL TYPOGRAPHY STYLES
+//Order Of Typography Mixin Arguments:
+//font-size, colour, font-weight, line-height, text-align, text-transform: uppercase
+
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $bodyFont;
+}
+
+h1, h2, h3, h4, h5, h6, button   {
+  font-family: $headerFont;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+
+//GLOBAL ELEMENT STYLES
+img {
+  width: 100%;
+}
+
+
+
+
