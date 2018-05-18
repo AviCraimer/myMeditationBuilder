@@ -47,11 +47,21 @@ body {
 
 }
 
-.login-button {
+.login {
       position: absolute;
+      display: flex;
       right: 10px;
       top: 10px;
+      .login-button {
+        width: 100px;
+      }
+      .imgWrap {
+        width: 50px;
+      }
 
+      img {
+        border-radius: 50%;
+      }
 }
 
 

@@ -3,15 +3,11 @@ import firebase from 'firebase';
 
 
 const PageLanding = ({fn, state}) => {
-  // fn.test();
-  // fn.setAppState({
-  //   flumox: 'fluster',
-  //   cat: 'allergy'
-  // });
+  // console.log(`basicMeditation fn call: `,  fn.basicMeditation('body',1200 ) ) ;
   return (
     <div className="page-landing">
 
-    <h1>My Meditation Builder</h1>
+    <h1>My Custom Meditation</h1>
 
     <div className="landing-image">
       <img src="public/assets/images/meditation.png" alt="A person sits in meditation posture"/>
@@ -46,11 +42,13 @@ const PageLanding = ({fn, state}) => {
       <div className="user-choice-buttons">
         <button onClick={(e) => {
           e.preventDefault();
+          fn.meditationFromState();
           fn.pageTransition ('play') } }>
           Meditate Now
         </button>
         <button onClick={(e) => {
           e.preventDefault();
+          fn.meditationFromState();
           fn.pageTransition ('builder') } } >
           Customize
         </button>

@@ -1,10 +1,16 @@
 import React from 'react';
 import firebase from 'firebase';
+import data from './data'
 
 const fn =  {};
 
-fn.test = function () {
+fn.test = function (testString) {
+   (testString) ? console.log(testString) : null ;
   console.log(`Should be the App`, this)
+}
+
+fn.thisApp = function () {
+  return this;
 }
 
 fn.handleChange = function (e) {
@@ -36,6 +42,70 @@ fn.pageTransition = function (pageName) {
   });
 }
 
+fn.meditationFromState = function () {
+  const {totalMinutes, meditationMethod } =  this.state;
+  const duration  =  fn.getSeconds(totalMinutes);
+  const sections = fn.basicMeditation(meditationMethod, duration );
+
+  const title = (meditationMethod === 'lk') ? 'Loving-Kindness' : fn.capitalize(meditationMethod) ;
+
+  this.setState({
+    activeMeditation: {
+      title: `${title} Meditation`,
+      sections: sections
+    }
+  });
+
+}
+
+
+fn.removeSectionAtIndex = function (index) {
+  const sectionsClone = Array.from(this.state.activeMeditation.sections);
+  sectionsClone.splice(index, 1);
+
+  //Copy the active meditation from state
+  const meditationClone = Object.assign({}, this.state.activeMeditation );
+
+  //set the sections property of the clone to the sections clone which has had the section removed.
+  meditationClone.sections = sectionsClone;
+  //set the active meditation state to the meditation clone.
+  this.setState({
+    activeMeditation: meditationClone
+  })
+}
+
+fn.replaceSectionAtIndex = function (index, replaceWith) {  //Second argument is a meditation section info object
+  const sectionsClone = Array.from(this.state.activeMeditation.sections);
+  sectionsClone[index] = replaceWith;
+
+  const meditationClone = Object.assign({}, this.state.activeMeditation );
+  meditationClone.sections = sectionsClone;
+  this.setState({
+    activeMeditation: meditationClone
+  })
+}
+
+fn.addSectionAfterIndex = function (index, addAfter) {
+  const sectionsClone = Array.from(this.state.activeMeditation.sections);
+
+  //Add the new section info object after the index
+  sectionsClone.splice(index + 1, 0, addAfter);
+
+  const meditationClone = Object.assign({}, this.state.activeMeditation );
+  meditationClone.sections = sectionsClone;
+  this.setState({
+    activeMeditation: meditationClone
+  })
+}
+
+
+
+fn.capitalize = function (string) {
+  return string[0].toUpperCase() + string.substring(1)
+}
+
+
+
 fn.login = function () {
   const provider = new firebase.auth.GoogleAuthProvider();
   let thisApp = this;
@@ -65,21 +135,18 @@ fn.login = function () {
       const dbRef = firebase.database().ref('users/' + uid);
       dbRef.once('value',(snapshot) => {
 
-        if ( snapshot.exists() ) {
-
-          console.log('user exists');
-        } else {
-
-          isNewUser = false;
+        if (!snapshot.exists() ) {
           console.log('user does not exist')
           //Set the user data to user key.
           dbRef.set(user);
+        } else {
+
+          console.log('user exists');
+
         }
-        thisApp.setState({
-          activePage: 'myMeditations'
-        });
+
       });
-      console.log(`isNewUser`,isNewUser);
+
 
       //This way downloads all the data from the database, not just the users data
       //Get value once.
@@ -121,23 +188,87 @@ fn.logout = function () {
   }).catch(function(error) {
     // An error happened.
   });
-
 }
 
 
 
-//A simple function to allow setting the state of App from within any scope
-fn.setAppState  = function (obj) {
-  console.log(`This inside setAppState`, this)
-  for (let key in obj) {
-    console.log(`key`, key);
-    console.log(`obj`, obj);
+fn.getSeconds = function (min, sec) { //Second argument is optional
+  //If there was a second argument (see what I did there?), keep that value, otherwise set it to zero
+  sec = (sec) ? sec : 0;
+  return (min * 60) + sec;
+}
 
-    // this.setState ({
-    //  [key]: obj[key]
-    // });
+fn.basicMeditation = function (type, duration ) {
+
+  let sections = [
+    'bell',
+    'settleIn',
+    60,
+    type+'Intro',
+    0,
+    type+'Callback',
+    0,
+    type+'Closing',
+    60,
+    'endingMeditation',
+    60,
+    'bell'
+  ];
+
+  let dur = fn.getMeditationDuration(sections);
+  console.log(`dur from inside basicMeditaton: `,  dur)
+  //This calculates how much time to put after into and after callback
+  let extraTime = (duration - dur) / 2 ;
+
+  sections[4] = extraTime;
+  sections[6] = extraTime;
+
+  sections = sections.map(shortHand => {
+    if (typeof shortHand === 'string' ) {
+      //If it is a string return the instruction section object from data
+      return data.instructions[shortHand];
+    }  else if (typeof shortHand === 'number' ) {
+      //If it is a number return a silence section object
+      return {
+        sectionName: 'Silence',
+        duration: shortHand,
+        mp3Url: null,
+        shortName: null
+      };
+    } //End else if
+  }); //End Map
+  return sections;
+}//End basicMeditation function
+
+
+//This calculates the duration from the shorthand meditation array
+fn.getMeditationDuration = function (shorthandArray, optionalFlag) { ////Optional flag can be left out or set to truthy
+  const secondsDur = shorthandArray.reduce((acc, cur) => {
+    if (typeof cur === 'string' ) {
+      const dur = data.instructions[cur].duration;
+      return acc + dur;
+    }  else if (typeof cur === 'number' ) {
+      return acc + cur;
+    }
+  },0);
+
+  if (optionalFlag) {
+    //Returns minutes if the optional flag is truthy
+    return Math.floor(secondsDur/60);
+  } else {
+    //Returns seconds if optional flag is undefined or falsey.
+    return secondsDur;
   }
 }
+
+//Gets the short hand from an array of meditation sections objects
+fn.getShorthandArray = function (longHandSections) {
+  const shorthand =  longHandSections.map(section => {
+     return (section.shortName) ? section.shortName : section.duration;
+  });
+  return shorthand;
+}
+
 
 
 

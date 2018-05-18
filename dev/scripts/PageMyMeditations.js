@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 
 
-const PageMyMeditations = ({fn}) => {
+const PageMyMeditations = ({fn, state}) => {
   fn.test();
   return (
     <h1>My Meditations</h1>

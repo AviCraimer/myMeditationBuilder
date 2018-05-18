@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 
 //Components
+import Header from './Header';
 import PageLanding from './PageLanding';
 import PageMyMeditations from './PageMyMeditations';
 import PageBuilder from './PageBuilder';
 import PagePlay from './PagePlay';
-
+import Meditation from './Meditation'
+import MeditationOptions from './MeditationOptions'
+import MeditationSection from './MeditationSection'
 
 //Other Modules
 import fn from './fn';
-
+import data from './data';
 
 
 // Initialize Firebase
@@ -36,7 +39,14 @@ class App extends React.Component {
       activePage: 'landing',
       totalMinutes: 20,
       meditationMethod: 'breath',
-      user: firebase.auth().currentUser
+      user: firebase.auth().currentUser,
+      data: data,
+      meditationOptions: {
+        show: false,
+        index: null,
+        add: false
+      },
+      silenceOption: 10
     };
 
     //Bind all the 'this' of all functions in fn to App.
@@ -50,6 +60,9 @@ class App extends React.Component {
     //Demonstrates that the bind has been successful
     // fn.test();
     fn.logout();
+
+
+
 
   }//End of constructor()
 
@@ -76,18 +89,9 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <button className="login-button"  onClick={(e) => {
-          e.preventDefault();
-          if (this.state.user === null) {
-            fn.login();
-          } else {
-            fn.logout();
-          }
+        <Header fn={fn} state={this.state} />
 
 
-          }} >
-          {this.state.user === null ? 'Login' : 'Logout' }
-        </button>
         {this.state.activePage === 'landing'
         ? <PageLanding fn={fn} state={this.state}/>
         : null }
