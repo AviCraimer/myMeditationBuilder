@@ -7,7 +7,7 @@ const PageLanding = ({fn, state}) => {
   return (
     <main className="page-landing">
 
-    <h1>My Custom Meditation</h1>
+    <h1>My Meditation Builder</h1>
 
     <div className="landing-image">
       <img src="public/assets/images/meditation.png" alt="A person sits in meditation posture"/>

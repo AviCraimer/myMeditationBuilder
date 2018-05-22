@@ -86,6 +86,7 @@ button {
   outline: none;
   border: none;
   cursor: pointer; /* Cursor on hover */
+  transform: translateY(-50%);
 }
 
 .slider::-moz-range-thumb {
@@ -104,7 +105,28 @@ button {
   cursor: pointer; /* Cursor on hover */
 }
 
+.slider::-webkit-slider-runnable-track {
+  height: 3px;
+  background: $darkColor;
+  width: 100%;
+  border: 1px solid $darkColor;
 
+}
+
+.slider::-moz-range-track {
+  height: 1px;
+  background: $darkColor;
+  width: 100%;
+  border: 1px solid $darkColor;
+
+}
+.slider::-ms-track {
+  height: 3px;
+  background: $darkColor;
+  width: 100%;
+  border: 1px solid $darkColor;
+
+}
 
 body {
   background: $bgColor2;
