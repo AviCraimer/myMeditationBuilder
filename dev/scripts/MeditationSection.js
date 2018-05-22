@@ -7,20 +7,16 @@ const MeditationSection = ({fn, state, index, section: {sectionName, duration, m
   return  (
     <React.Fragment>
       <h3>{sectionName}</h3>
-      <h4>{Math.floor(state.activeMeditation.sections[index].duration / 60 ) }
+      <h4>{Math.floor(state.activeMeditation.sections[index].duration / 60 )+ " " }
            { Math.floor(state.activeMeditation.sections[index].duration / 60 )
              ? 'Minute'
              : 'Minutes'}</h4>
-        <button
-          className="trash"
-          onClick={() => fn.removeSectionAtIndex(index) }
-        >
-          X
-        </button>
+
       {
         (mp3Url)
         ? <button
-            className="change-button"
+            className="change-section"
+            title="Change this section."
             onClick={ () => fn.thisApp()
               .setState({
                 meditationOptions: {
@@ -28,12 +24,13 @@ const MeditationSection = ({fn, state, index, section: {sectionName, duration, m
                   add: false,
                   index: index
                 }
-               }) } >Change</button>
+               }) } ></button>
         : (
           <form action="">
 
             <input
               type="range"
+              className="slider"
               value={Math.floor(state.activeMeditation.sections[index].duration / 60)}
               min="0"
               max="30"
@@ -54,18 +51,23 @@ const MeditationSection = ({fn, state, index, section: {sectionName, duration, m
           </form>
         )
       }
+      <img src="public/assets/images/delete-icon.svg"
+        alt="Remove this section."
+        title="Remove this section."
+        className="delete-section"
+        onClick={() => fn.removeSectionAtIndex(index) }
+      />
+      <img className="add-section"  src="public/assets/images/add-icon.svg" alt="Add a new section" title="Add a section"
+      onClick={ () => fn.thisApp()
+        .setState({
+          meditationOptions: {
+            show: true,
+            add: true,
+            index: index
+          }
+         }) }
+      />
 
-      <button
-        className="add-section"
-        onClick={ () => fn.thisApp()
-          .setState({
-            meditationOptions: {
-              show: true,
-              add: true,
-              index: index
-            }
-           }) }
-        >+</button>
     </React.Fragment>
   )
 }

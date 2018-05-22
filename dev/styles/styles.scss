@@ -1,11 +1,19 @@
-@import "_mixins.scss";
-@import "_setup.scss";
-@import "_variables.scss";
-@import "_global.scss";
+@import "mixins";
+@import "setup";
+@import "variables";
+@import "global";
 
 
 // Components
 
-@import "./components/page-landing.scss";
-@import './components/meditation-modules.scss';
+@import "./components/_header.scss";
+@import "./components/_page-landing.scss";
+@import './components/_page-builder.scss';
+@import './components/_page-my-meditations.scss';
+@import './components/_meditation-modules.scss';
+
+
+
+
+
 

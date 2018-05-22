@@ -1,13 +1,23 @@
 .meditation {
   h2 {
-
+    display: flex;
+    align-items: center;
+    span {
+      display: flex;
+      align-items: center;
+      margin-right: 0.4em;
+      cursor: pointer;
+      img {
+        width: 25px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 30px;
-  }
+
+
+
 
   h3 {
 
@@ -17,13 +27,56 @@
 
   }
 
-  li {
+  .slider {
+    margin: 15px 0;
+  }
+
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li { //Meditation section
     position: relative;
     margin-bottom: 3px;
     border: 1px solid #000;
-    border-radius: 8px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.555);
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px $shadowColor ;
+    background: $activeColor;
+    padding: 10px;
   }
+
+
+
+
+  .change-section {
+    background-image: url(../assets/images/edit-icon.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 45px;
+    height: 45px;
+  }
+
+  .delete-section {
+    // background-image: url(../assets/images/delete-icon.svg);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    right: 20px;
+    bottom: 50px;
+    z-index: 10;
+    background: $accentColor;
+    display: block;
+    cursor: pointer;
+
+  }
+
   .add-section {
     position: absolute;
     right: 20px;
@@ -33,12 +86,74 @@
     margin: 0;
     transform: translateY(50%);
     border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    color: white;
-    background: $bgColor1;
+    height: 45px;
+    width: 45px;
+    // color: $accentColor;
+    // font-size: 20px;
+    // font-family: $bodyFont;
+    background: $accentColor;
+    display: block;
+    cursor: pointer;
   }
 
 
 
+
+}
+
+
+
+
+.meditation-options {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 30px;
+  width: 100%;
+  z-index: 20;
+  background: $darkColor;
+  color: $accentColor;
+
+
+  &.show {
+    display: block;
+  }
+
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    color: $darkColor;
+    margin-bottom: 3px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px $shadowColor ;
+    background: $activeColor;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 800px) {
+  .meditation {
+    flex: 2 2 490px ;
+  }
+  .meditation-options {
+    display: block;
+    flex: 1 1 245px;
+    position: static;
+    margin-left: 10px;
+    padding: 0;
+    background: transparent;
+    color: $darkColor;
+    transition: opacity 0.5s;
+  }
+  .fade-options {
+    opacity: 0.3;
+  }
 }

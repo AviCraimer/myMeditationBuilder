@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+  padding-right: 30px;
+  position: relative;
+  z-index: 10;
+
+}
+
+
+.login {
+
+  // position: absolute;
+  display: flex;
+  // right: 10px;
+  // top: 10px;
+  .login-button {
+    width: 100px;
+  }
+  .logout-button {
+    width: 50px;
+  }
+
+  .imgWrap {
+    width: 50px;
+  }
+
+  img {
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

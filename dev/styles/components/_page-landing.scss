@@ -1,6 +1,8 @@
 .page-landing {
-  background: rgb(198, 185, 201);
-  padding: 1px;
+  background: $bgColor2;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
 
 
   .landing-image {
@@ -8,50 +10,40 @@
     margin: auto;
   }
 
-
-  // Base stylings for range taken from W3 Schools example: https://www.w3schools.com/howto/howto_js_rangeslider.asp
-  .slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    width: 100%; /* Full-width */
-    height: 25px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-    transition: opacity .2s;
-    }
-
-
-
-
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: rgb(90, 152, 160); /* Green background */
-    cursor: pointer; /* Cursor on hover */
+  h1 {
+    text-align: center;
   }
 
-  .slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: rgb(90, 152, 160); /* Green background */
-    cursor: pointer; /* Cursor on hover */
-  }
 
-  .minutes-display {
+  h3 { // minutes-display
     font-weight: normal;
-
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 15px;
     span {
       display: inline-block;
-      width: 20px;
+      width: 30px;
       text-align: center;
       font-weight: bold;
     }
   }
+ .user-choice-buttons, .meditation-type-buttons {
+  display: flex;
+  justify-content: center;
+
+ }
 
 
+ .slider {
+   margin-top: 10px;
+ }
 
+ //Media
+ @media (min-width: 600px) {
+  top: -70px;
+  .landing-image {
+    width: 40%;
+  }
 }
+
+}//End of page-landing

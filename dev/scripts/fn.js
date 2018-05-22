@@ -131,6 +131,7 @@ fn.login = function () {
         user: user
       });
 
+      fn.getMeditations();
 
       const dbRef = firebase.database().ref('users/' + uid);
       dbRef.once('value',(snapshot) => {
@@ -267,6 +268,54 @@ fn.getShorthandArray = function (longHandSections) {
      return (section.shortName) ? section.shortName : section.duration;
   });
   return shorthand;
+}
+
+fn.saveMeditation = function () {
+  const meditationToSave = Object.assign({}, this.state.activeMeditation);
+  const meditaitonDbKey = meditationToSave.dbKey ? meditationToSave.dbKey : null;
+
+  const userId = this.state.user.id;
+
+  if (meditaitonDbKey) {
+    //If the active Meditation has a meditationDbKey, this means it already exists in the database.
+    //Make a db reference to that key inside the user, then set that equal to the current meditation. This will overwrite the previous version of the meditation.
+    const dbRef = firebase
+      .database()
+      .ref('users/'+ userId + '/meditations/'+ meditaitonDbKey);
+    dbRef.set(meditationToSave);
+  } else {
+    //If there is no dbKey, then push a new meditation inside the meditations reference for that user.
+    const dbRef = firebase
+      .database()
+      .ref('users/'+ userId + '/meditations');
+    const savedMeditationRef = dbRef.push(meditationToSave);
+
+    //After pushing the new meditation, update the state for active meditation with the db key of the newly stored.
+    const newDbKey =  savedMeditationRef.path.pieces_[3];
+    meditationToSave.dbKey = newDbKey;
+    this.setState({ activeMeditation: meditationToSave });
+  }
+
+
+
+}//End of save meditation function
+
+
+//Used to populate the state with user meditations, updated on change. It is called inside the login function
+fn.getMeditations = function () {
+  if (this.state.user.id) {
+    const uid = this.state.user.id;
+
+
+    const dbRef = firebase.database().ref('users/' + uid + '/meditations');
+    dbRef.on('value',(snapshot) => {
+
+      console.log('user meditations', snapshot.val() );
+      this.setState({
+        userMeditations: snapshot.val()
+      });
+    });
+  }//End if user id
 }
 
 

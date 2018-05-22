@@ -6,73 +6,73 @@ const data = {
   instructions: {
     bell: {
       sectionName: 'Tibetan Bell',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/bell.mp3',
       shortName: 'bell'
     },
     settleIn: {
       sectionName: 'Settling in, Letting Go, Coming to the Present',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/settleIn.mp3',
       shortName: 'settleIn'
     },
     breathIntro: {
       sectionName: 'Starting to Focus on Your Breath',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/breathIntro.mp3',
       shortName: 'breathIntro'
     },
     breathCallback: {
       sectionName: 'Noticing Distraction and Returning to the Breath',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/breathCallback.mp3',
       shortName: 'breathCallback'
     },
     breathClosing: {
       sectionName: 'Releasing the Breath',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/breathClosing.mp3',
       shortName: 'breathClosing'
     },
     bodyIntro: {
       sectionName: 'Bringing Awareness to Your Body Sensations',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/bodyIntro.mp3',
       shortName: 'bodyIntro'
     },
     bodyCallback: {
       sectionName: 'Returing Attention to the Body',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/bodyCallback.mp3',
       shortName: 'bodyCallback'
     },
     bodyClosing: {
       sectionName: 'Bring Your Body Awareness Meditation to a Close',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/bodyClosing.mp3',
       shortName: 'bodyClosing'
     },
     lkIntro: {
       sectionName: 'Instructions for Beggining Loving-Kindness Meditation',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/lkInto.mp3',
       shortName: 'lkIntro'
     },
     lkCallback: {
       sectionName: 'Coming Back to the Loving-Kindness Practice',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/lkCallback.mp3',
       shortName: 'lkCallback'
     },
     lkClosing: {
       sectionName: 'Ending Loving-Kindess With the Dedication of Merit',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/lkClosing.mp3',
       shortName: 'lkClosing'
     },
     endingMeditation: {
       sectionName: 'Coming Out of Your Meditation',
-      duration: 0,
+      duration: 90,
       mp3Url: 'assets/audio/endingMeditation.mp3',
       shortName: 'endingMeditation'
     }

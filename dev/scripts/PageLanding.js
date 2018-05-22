@@ -5,7 +5,7 @@ import firebase from 'firebase';
 const PageLanding = ({fn, state}) => {
   // console.log(`basicMeditation fn call: `,  fn.basicMeditation('body',1200 ) ) ;
   return (
-    <div className="page-landing">
+    <main className="page-landing">
 
     <h1>My Custom Meditation</h1>
 
@@ -24,7 +24,7 @@ const PageLanding = ({fn, state}) => {
           Loving-Kindness
         </button>
       </div>
-      <label htmlFor="totalMinutes">Total Time</label>
+      <label className="hidden"  htmlFor="totalMinutes">Total Time</label>
       <input
         id="totalMinutes"
         name="totalMinutes"
@@ -40,12 +40,12 @@ const PageLanding = ({fn, state}) => {
       <h3 className="minutes-display">Meditate for <span>{state.totalMinutes}</span> Minutes</h3>
 
       <div className="user-choice-buttons">
-        <button onClick={(e) => {
+        {/* <button onClick={(e) => {
           e.preventDefault();
           fn.meditationFromState();
           fn.pageTransition ('play') } }>
           Meditate Now
-        </button>
+        </button> */}
         <button onClick={(e) => {
           e.preventDefault();
           fn.meditationFromState();
@@ -54,7 +54,7 @@ const PageLanding = ({fn, state}) => {
         </button>
       </div>
     </form>
-    </div> ); //End of page-landing
+    </main> ); //End of page-landing
 
 }
 

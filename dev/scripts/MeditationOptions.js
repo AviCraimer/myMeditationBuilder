@@ -12,7 +12,7 @@ const MeditationOptions = ({fn, state, index, add}) => {
   console.log('instructionsArray', instructionsArray)
 
   return (
-    <section className="meditation-options" >
+    <section className={`meditation-options ${(state.meditationOptions.show) ? 'show'  : 'fade-options'}`} >
         <h2>Choose a Recording</h2>
         <ul className="options-list" >
           {/* The first option is for adding a silent section */}
@@ -22,6 +22,7 @@ const MeditationOptions = ({fn, state, index, add}) => {
             <form action="">
               <input
                 name="silenceOption"
+                className="slider"
                 type="range"
                 min="0"
                 max="120"
@@ -39,14 +40,17 @@ const MeditationOptions = ({fn, state, index, add}) => {
                   sectionName: 'Silence',
                   shortName: null
                 }
-
-
-                if (add) {
+                if (add && state.meditationOptions.show) {
                   fn.addSectionAfterIndex(index, info);
-                } else {
+                } else if (state.meditationOptions.show) {
                   fn.replaceSectionAtIndex(index,info);
                 }
-
+                //Reset the meditation Options state
+                fn.thisApp().setState({meditationOptions: {
+                  show: false,
+                  index: null,
+                  add: false
+                }});
               } }
               >{ (add)  ? 'Add Section' : 'Select' }
             </button>
@@ -57,17 +61,25 @@ const MeditationOptions = ({fn, state, index, add}) => {
               <li className="option" key={'option-'+i} >
                 <h3>{info.sectionName}</h3>
                 <h4>{durationMin} { (durationMin === 1  ) ? 'Minute'  : 'Minutes'}</h4>
-                <button className="play-option" >Listen</button>
+                {/* <button className="play-option" >Listen</button> */}
                 <button
                   className="select-option"
                   onClick={() => {
+
                     if (add) {
                       fn.addSectionAfterIndex(index, info);
                     } else {
                       fn.replaceSectionAtIndex(index,info);
                     }
 
-                  } }
+
+                  fn.thisApp().setState({meditationOptions: {
+                    show: false,
+                    index: null,
+                    add: false
+                  }});
+                }}
+
                   >{ (add)  ? 'Add Section' : 'Select' }</button>
               </li>
             )

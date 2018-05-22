@@ -1,0 +1,12 @@
+.builder {
+  @media (min-width: 800px) {
+    display: flex;
+    flex-wrap: wrap;
+    h1 {
+      flex-basis: 100%;
+    }
+
+
+  }
+
+}

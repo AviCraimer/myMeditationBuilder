@@ -12,14 +12,12 @@ const PageBuilder = ({fn, state}) => {
     <main className="builder" >
       <h1>Meditation Builder</h1>
       <Meditation fn={fn} state={state} meditation={state.activeMeditation} />
-      {(state.meditationOptions.show)
-      ? <MeditationOptions
+      <MeditationOptions
         fn={fn}
         state={state}
         index={state.meditationOptions.index}
         add={state.meditationOptions.add}
-        />
-      : null }
+      />
     </main>
   ) ;
 }
